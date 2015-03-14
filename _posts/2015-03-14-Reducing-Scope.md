@@ -2,7 +2,7 @@
 layout: post
 title: "Reducing Scope"
 date: 2015-03-14 11:30:00 -0400
-comments: false
+comments: true
 ---
 
 The original plan for PDC 1.0 was that it would provide the steps to bootstrap a vanilla linux install on a [Raspberry Pi 
