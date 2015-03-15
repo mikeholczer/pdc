@@ -20,4 +20,6 @@ The first thing you need to do is get the base image on an SD card and boot up y
 7. You're now ready to insert the microSD card in the Pi and boot it up.
 
 If you have a HDMI monitor and keyboard handy you can interact wth the Pi locally. You should also be able to ssh to the Pi with "ssh root@<IP ADDRESS OF PI>". You can determine the IP Address of the Pi by login in locally and running "ifconfig". The default username and password are "root" and "debian". I suggest you immediately change the root password with "chpasswd root:<NEW PASSWORD>".
+
+You are now ready to run the [setup.sh](https://github.com/mikeholczer/pdc/blob/master/setup.sh) script that you can find in the root of the master branch of the [project repository](http://github.com/mikeholczer/pdc).
 </div>
