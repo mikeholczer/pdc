@@ -21,7 +21,18 @@ The first thing you need to do is get the base image on an SD card and boot up y
 
 If you have a HDMI monitor and keyboard handy you can interact wth the Pi locally. You should also be able to ssh to the Pi with `ssh root@<IP ADDRESS OF PI>`. You can determine the IP Address of the Pi by login in locally and running `ifconfig`. The default username and password are "root" and "debian". I suggest you immediately change the root password with `chpasswd root:<NEW PASSWORD>`.
 
-You are now ready to run the [setup.sh](https://github.com/mikeholczer/pdc/blob/master/setup.sh) script that you can find in the root of the master branch of the [project repository](http://github.com/mikeholczer/pdc). You can simple run `wget -O https://github.com/mikeholczer/pdc/blob/master/setup.sh | bash`. I normally [wouldn't recommend piping from wget to your shell](http://www.seancassidy.me/dont-pipe-to-your-shell.html), but since this is meant to be done on a new machine with nothing important on it, I think it's OK.
+You're now ready to start setting up the PDC system:
+
+1. First off install git
+  * `apt-get update && apt-get install -y git`
+2. Next you need to clone the PDC repo.
+  * `git clone https://github.com/mikeholczer/pdc.git`
+3. You need to customize the Natman Dockerfile to include the public port to map for ssh access and the local address of your router.
+  * I hope to provide a more automated means for this step
+  * Edit pdc/Dockerfiles/Natman/Dockerfile and change "12345" to the port you want to port map ssh to and the "192.168.0.1" to the local address of your router.
+4. Finally run the setup script
+  * `setup.sh`
+  * You may need to make it executable first `chmod +x setup.sh`
 
 *The setup script does not yet provide a full setup of the system. Follow the blog for updates on its progress*
 </div>
