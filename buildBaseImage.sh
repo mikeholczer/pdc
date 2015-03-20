@@ -9,6 +9,9 @@ chroot_dir='/var/chroot/jessie'
 apt_mirror='http://http.debian.net/debian'
 docker_image='pdcbase:latest'
 
+### update system
+apt-get update && update dist-upgrade -y
+
 ### make sure that the required tools are installed
 apt-get install -y docker.io debootstrap dchroot
 
