@@ -24,7 +24,7 @@ gaaccount: 'UA-60758044-1'
 disqus: 'persondistributedcloud'
 comments: true
 
-permalink: /:year/:month/:title
+permalink: /blog/:year/:month/:title
 paginate: 3
 paginate_path: "/blog/page:num/"
 

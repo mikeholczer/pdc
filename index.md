@@ -8,7 +8,7 @@ layout: default
 
 The first thing you need to do is get the base image on an SD card and boot up your Raspberry Pi 2 with it. The instructions below assume access to a Mac OS X machine as well as the Raspberry Pi 2.
 
-1. On the Mac download this [linux image](https://images.collabora.co.uk/rpi2/jessie-rpi2-20150202.img.gz) from Sjoerd Simons [blog post](http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/).
+1. On the Mac download this [linux image](https://images.collabora.co.uk/rpi2/jessie-rpi2-20150202.img.gz) from Sjoerd Simons [blog post](http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/)
 2. Double-click the .gz file to extract the .img file.
 3. Connect the MicroSD card to the Mac and use the "diskutil list" command to determine the device name for it. It will be something like "/dev/disk5". I will refer to it as "/dev/disk#" going forward.
 4. Unmount the MicroSD card with `diskUtil unmountDisk /dev/disk#`.

@@ -1,0 +1,25 @@
+[
+	{
+		"name":"Home",
+		"url":"/index.html"
+	},
+	{
+		"name":"Blog",
+		"url":"/blog/index.html",
+		"activePathPattern":"/blog/"
+		
+	},
+	{
+		"name":"Links",
+		"url":"links.html",
+		"class":"visible-xs-block visible-sm-block"
+	},
+	{
+		"name":"About",
+		"url":"/about.html"
+	},
+	{
+		"name":"RSS",
+		"url":"/feed.xml"
+	}
+]
