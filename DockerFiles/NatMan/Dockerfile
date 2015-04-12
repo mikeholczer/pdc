@@ -8,7 +8,7 @@ FROM pdcnode
 # Install NatMan
 # Fork of NatMan with support for unmapping and exiting on SIGTERM (rather than just SIGINT)
 # Once/if PR https://github.com/Marak/natman/pull/5 is merged, then the forked version will not be needed
-RUN apt-get update && apt-get install git
+RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/mikeholczer/natman.git
 WORKDIR /data/natman
 RUN npm install -g
