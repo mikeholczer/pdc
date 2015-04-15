@@ -3,11 +3,10 @@
 ### based on https://github.com/docker-32bit/debian
 
 ### settings
-arch=armhf
-suite=jessie
-chroot_dir='/var/chroot/jessie'
-apt_mirror='http://http.debian.net/debian'
-docker_image='pdcbase:latest'
+suite=utopic
+chroot_dir='/var/chroot/pdcbase'
+apt_mirror='http://ports.ubuntu.com/'
+docker_image='pdcbase'
 
 ### update system
 apt-get update && update dist-upgrade -y
@@ -16,15 +15,24 @@ apt-get update && update dist-upgrade -y
 apt-get install -y docker.io debootstrap dchroot
 
 ### install a minbase system with debootstrap
-export DEBIAN_FRONTEND=noninteractive
-debootstrap --arch $arch $suite $chroot_dir $apt_mirror
+debootstrap $suite $chroot_dir $apt_mirror
 
-### update the list of package sources
-cat <<EOF > $chroot_dir/etc/apt/sources.list
-deb $apt_mirror jessie main contrib non-free
-deb $apt_mirror jessie-updates main contrib non-free
-deb http://security.debian.org/ jessie/updates main contrib non-free
-EOF
+# Set up initial sources.list
+  cat <<EOM >$chroot_dir/etc/apt/sources.list
+deb http://ports.ubuntu.com/ ${suite} main restricted universe multiverse
+# deb-src http://ports.ubuntu.com/ ${RELEASE} main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ ${suite}-updates main restricted universe multiverse
+# deb-src http://ports.ubuntu.com/ ${RELEASE}-updates main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ ${suite}-security main restricted universe multiverse
+# deb-src http://ports.ubuntu.com/ ${RELEASE}-security main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ ${suite}-backports main restricted universe multiverse
+# deb-src http://ports.ubuntu.com/ ${RELEASE}-backports main restricted universe multiverse
+EOM
+chroot $chroot_dir apt-get update
+chroot $chroot_dir apt-get -y -u dist-upgrade
 
 ### cleanup
 chroot $chroot_dir apt-get autoclean

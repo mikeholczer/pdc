@@ -11,6 +11,7 @@ FROM pdcnode
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/mikeholczer/natman.git
 WORKDIR /data/natman
+RUN ln /usr/bin/nodejs /usr/bin/node
 RUN npm install -g
 # Define default command.
-CMD ["natman", "open", "22", "12345", "-g", "192.168.0.1"]
+CMD ["natman", "open", "22", "22789", "-g", "172.16.20.1"]
