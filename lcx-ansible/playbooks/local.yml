@@ -1,0 +1,37 @@
+---
+- hosts: local
+  sudo: yes
+  tasks:
+  - name: install packages
+    apt: pkg={{item}} state=latest update_cache=yes cache_valid_time=86400
+    with_items:
+    - network-manager
+    - lxc
+    - dnsmasq
+  - name: configure lxc-net
+    lineinfile: dest=/etc/default/lxc-net regexp=LXC_DHCP_CONFILE= line=LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf
+    lineinfile: dest=/etc/default/lxc-net regexp=LXC_DOMAIN= line=LXC_DOMAIN=\"lxc\"
+  - name: configure dnsmasq
+    lineinfile: dest=/etc/dnsmasq.conf insertafter="# non-public domains." line=server=/lxc/10.0.3.1
+  - name: create local dns for rsync
+    lineinfile: dest=/etc/lxc/dnsmasq.conf create=yes line=dhcp-host=rsync,10.0.3.100
+  - name: create rsync container
+    command: lxc-create -n rsync -t ubuntu -- --packages python,python-apt creates=/var/lib/lxc/rsync
+  - name: configure rsync container for auto-start
+    lineinfile:
+      dest: /var/lib/lxc/rsync/config
+      line: "{{ item.line }}"
+    with_items:
+      - { line: lxc.start.auto=1 }
+      - { line: lxc.start.delay=5 }
+  - name: create local dns for natman
+    lineinfile: dest=/etc/lxc/dnsmasq.conf create=yes line=dhcp-host=natman,10.0.3.101
+  - name: create natman container
+    command: lxc-create -n natman -t ubuntu -- --packages python,python-apt creates=/var/lib/lxc/natman
+  - name: configure natman container for auto-start
+    lineinfile:
+      dest: /var/lib/lxc/natman/config
+      line: "{{ item.line }}"
+    with_items:
+      - { line: lxc.start.auto=1 }
+      - { line: lxc.start.delay=5 }
