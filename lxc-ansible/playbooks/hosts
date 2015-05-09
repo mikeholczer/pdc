@@ -1,0 +1,12 @@
+[manager]
+local           ansible_connection=local
+
+[lxc]
+rsync.lxc
+natman.lxc
+
+[rsync]
+rsync.lxc
+
+[natman]
+natman.lxc
