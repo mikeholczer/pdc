@@ -1,0 +1,12 @@
+---
+- hosts: natman
+  sudo: yes
+  tasks:
+  - name: install packages
+    apt: pkg={{item}} state=latest update_cache=yes cache_valid_time=86400
+    with_items:
+    - npm
+  - name: link nodejs as node
+    command: ln /usr/bin/nodejs /usr/bin/node creates=/usr/bin/node
+  - name: install natman
+    npm: name=natman global=yes
